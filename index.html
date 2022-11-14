@@ -5,118 +5,97 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 
-    <!-- 1114-001스타일시트 -->
     <style>
-        body {
-	margin: 0;
-	padding: 0;
-	font-family: "Open Sans", sans-serif;
-	background-color: #f1f1f1;
-	color: #555;
-}
-h1, h2, h3, h4, h5, h6, p {
-	margin: 0;
-	padding: 0;
-}
-section {
-	/* height: 200px; *//* jQuery test height */
-	height: 900px;
-}
-section h1 {
-	margin: 60px 0 10px 60px;
-	font-size: 2.4em;
-	font-weight: 300;
-	opacity: 0;
-	transform: translateX(-100px);
-	transition: opacity 0.4s, transform 0.6s;
-}
-section p {
-	margin-left: 60px;
-	color: #aaa;
-	opacity: 0;
-	transform: translateX(-100px);
-	transition: opacity 0.4s, transform 0.6s;
-	transition-delay: 0.4s;
-}
-section.active h1,
-section.active p {
-	opacity: 1;
-	transform: translateX(0);
-}
-    </style>
-     
+        .accordion {
+          background-color: #eee;
+          color: #444;
+          cursor: pointer;
+          padding: 18px;
+          width: 100%;
+          border: none;
+          text-align: left;
+          outline: none;
+          font-size: 15px;
+          transition: 0.4s;
+        }
+        
+        .active, .accordion:hover {
+          background-color: #ccc; 
+        }
+        
+        .panel {
+          padding: 0 18px;
+          display: none;
+          background-color: white;
+          overflow: hidden;
+        }
+        </style>
+
+
 </head>
+
+
+
 <body>
-    
-<div class="container">
-    <section id="page1">
-        <h1>오늘은 월요일1</h1>
-        <p>금요일은 언제오나</p>
-    </section>
-    <section id="page2">
-        <h1>오늘은 월요일2</h1>
-        <p>금요일은 언제오나</p>
-    </section>
-    <section id="page3">
-        <h1>오늘은 월요일3</h1>
-        <p>금요일은 언제오나</p>
-    </section>
-    <section id="page4">
-        <h1>오늘은 월요일4</h1>
-        <p>금요일은 언제오나</p>
-    </section>
-    <section id="page5">
-        <h1>오늘은 월요일5</h1>
-        <p>금요일은 언제오나</p>
-    </section>
-    <section id="page6">
-        <h1>오늘은 월요일6</h1>
-        <p>금요일은 언제오나</p>
-    </section>
- 
+    <h1>
+        Accordion
+    </h1>
 
-</div>
-    <script>    
-        setTimeout(function(){
-            $("body, html").animate({scrollTop:0},600,function(){
-                $("#page1").addClass("acitive");
-                $(window).scroll(function(){
-                    let t = $(this).scrollTop();
-                    if(t <= $("#page1").offset().top+300){
-                        $("#page1").addClass("active");
-                    }
-                    else if(t <= $("#page1").offset().top+300){
-                        $("#page1").addClass("active");
-                    }
+    <button class="accordion">section1</button>
+    <div class="panel">
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae ad officiis deleniti provident quo aspernatur dicta totam dignissimos tempora eum, id, unde amet quibusdam quod molestias suscipit et, non in.
+        </p>
+    </div>
 
-                    else if(t <= $("#page2").offset().top+300){
-                        $("#page2").addClass("active");
-                    }
+    <button class="accordion">section2</button>
+    <div class="panel">
 
-                    else if(t <= $("#page3").offset().top+300){
-                        $("#page3").addClass("active");
-                    }
 
-                    else if(t <= $("#page4").offset().top+300){
-                        $("#page4").addClass("active");
-                    }
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae ad officiis deleniti provident quo aspernatur dicta totam dignissimos tempora eum, id, unde amet quibusdam quod molestias suscipit et, non in.
+        </p>
+    </div>
 
-                    else if(t <= $("#page5").offset().top+300){
-                        $("#page5").addClass("active");
-                    }
+    <button class="accordion">section3</button>
+    <div class="panel">
 
-                    else if(t <= $("body, html").height()){
-                        $("#page6").addClass("active");
-                    }
-                    
-             
-            
-                })
-            })
-        },150);
+
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae ad officiis deleniti provident quo aspernatur dicta totam dignissimos tempora eum, id, unde amet quibusdam quod molestias suscipit et, non in.
+        </p>
+    </div>
+
+
+    <script>
+        let acc =document.getElementsByClassName("accordion");
+        let i;
+        
+        for(i = 0; i < acc.length; i++){
+            // acc.length는 길이가 아니라 갯수로 생각하고 3개임
+            acc[i].addEventListener("click", function()
+            // 첫번쨰 acc 는 첫 번쨰 섹션을 말하고 2는 두번쨰 섹션을 말함
+            {
+                this.classList.toggle("active");
+                //this니까 첫번째 두번째 세번째를 다 받아주지 ㅇㅇ
+                // 여긴 제이쿼리로, 클레스를 toggle(붙였다 뗐다 반응하게 하는)로 고쳐라(하라)
+                let panel = this.nextElementSibling;
+                //패널이 형제 요소들이랑 같이 움직여라 이 뜻같음
+                if(panel.style.display == "block"){
+                    panel.style.display = "none";
+                }else{
+                    panel.style.display = "block";
+                }
+            }
+          );
+            //acc i 번째에 이벤트 발생, onclick과 비슷
+        }
     </script>
 
 </body>
+
+
+
+
 </html>
