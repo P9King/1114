@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화면다크모드</title>
+
+    <style>
+        body{
+            padding: 25px;
+            background: #fff;
+            color: black;
+            font-size: 25px;
+
+        }
+
+        .dark-mode{
+            background: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt eius reprehenderit neque a aut odit voluptates repellat incidunt earum, est voluptas itaque tenetur adipisci, ipsum, ipsa sequi commodi quasi inventore?
+
+    </p>
+    <button onclick="myFunction()">Toggle Dark Mode</button>
+    <script>
+        function myFunction(){
+            let element = document.body;
+            element.classList.toggle("dark-mode");
+            //엘레멘트 요소중 클레스 리스트에 토글을 넣는다
+        }
+    </script>
+</body>
+</html>
